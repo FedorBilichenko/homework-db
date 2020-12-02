@@ -8,14 +8,18 @@ const startServer = () => {
 
   load({ app });
 
-  // @ts-ignore
-  app.listen(config.port, (err) => {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    console.log(`Server is listening on port ${config.port}`);
-  });
+  app
+    .listen(config.port, () => {
+      console.log(`
+      ################################################
+      🛡️  Server listening on port: ${config.port} 🛡️
+      ################################################
+    `);
+    })
+    .on('error', (err) => {
+      console.error(err);
+      process.exit(1);
+    });
 };
 
 startServer();

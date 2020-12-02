@@ -19,6 +19,8 @@ const config = {
     ? parseInt(process.env.DB_MAX_CONNECTIONS, 10)
     : 10,
   dbPassword: process.env.DB_PASSWORD,
+
+  apiPrefix: '/api',
 };
 
 export default config;

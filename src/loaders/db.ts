@@ -1,7 +1,6 @@
 import { Pool, PoolClient } from 'pg';
 
 import config from '../config';
-import initDb from '../database/init';
 
 const loadDb = async (): Promise<PoolClient> => {
   const pool = new Pool({
@@ -13,11 +12,7 @@ const loadDb = async (): Promise<PoolClient> => {
     max: config.dbMaxConnections,
   });
 
-  const client = await pool.connect();
-
-  await initDb({ pollClient: client });
-
-  return client;
+  return pool.connect();
 };
 
 export default loadDb;
