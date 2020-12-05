@@ -1,8 +1,18 @@
+import path from 'path';
+
 import dotenv from 'dotenv';
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-const envFound = dotenv.config();
+const isProd = process.env.NODE_ENV === 'production';
+
+const workDir = path.resolve(__dirname, '../../');
+
+const envFound = dotenv.config({
+  path: isProd
+    ? path.join(workDir, '.env.production')
+    : path.join(workDir, '.env.default'),
+});
 
 if (envFound.error) {
   throw new Error("⚠️  Couldn't find .env file  ⚠️");

@@ -1,17 +1,19 @@
-import { IManager, IManagerModel } from '../types';
-
 import BaseService from './BaseService';
 
-export default class ManagerService extends BaseService<IManagerModel> {
-  constructor({ model }: { model: IManagerModel }) {
-    super({ model });
-  }
-
+export default class ManagerService extends BaseService {
   async createManager({ name }: { name: string }) {
-    return this.model.createManager({ name });
+    return this.models.managerModel.createManager({ name });
   }
 
-  async getManagers(): Promise<{ managers: IManager[] }> {
-    return this.model.getManagers();
+  async getManagers() {
+    return this.models.managerModel.getManagers();
+  }
+
+  async getManagersWithOrders() {
+    return this.models.managerModel.getManagersWithOrders();
+  }
+
+  async removeAll() {
+    return this.models.managerModel.removeAll();
   }
 }

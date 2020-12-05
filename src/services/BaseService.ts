@@ -1,7 +1,9 @@
-export default class BaseService<Model> {
-  model: Model;
+import { IModels } from '../models';
 
-  constructor({ model }: { model: Model }) {
-    this.model = model;
+export default class BaseService {
+  models: IModels;
+
+  constructor({ models }: { models: IModels }) {
+    this.models = models;
   }
 }

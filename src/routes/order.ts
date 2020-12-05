@@ -7,23 +7,21 @@ const router = Router();
 
 const routes = ({
   app,
-  services: { authorService },
+  services: { orderService },
 }: {
   app: Router;
   services: IServices;
 }) => {
-  app.use('/author', router);
+  app.use('/order', router);
 
   router.post('/create', async (req: Request, res: Response) => {
-    const { author, error } = await authorService.createAuthor({
-      name: req.body.name,
-    });
-    res.status(author ? 200 : 400);
+    const { order, error } = await orderService.createOrder(req.body);
+    res.status(order ? 200 : 400);
     res
       .send(
-        author
+        order
           ? {
-              author,
+              order,
             }
           : createBadRequestBody({ error })
       )
@@ -31,23 +29,17 @@ const routes = ({
   });
 
   router.get('/list', async (req: Request, res: Response) => {
-    const { authors, error } = await authorService.getAuthors();
-    res.status(authors ? 200 : 400);
+    const { orders, error } = await orderService.getOrders();
+    res.status(orders ? 200 : 400);
     res
       .send(
-        authors
+        orders
           ? {
-              authors,
+              orders,
             }
           : createBadRequestBody({ error })
       )
       .end();
-  });
-
-  router.post('/remove_all', async (req: Request, res: Response) => {
-    const { authors, error } = await authorService.removeAll();
-    res.status(authors ? 200 : 400);
-    res.send(authors ? { authors } : createBadRequestBody({ error })).end();
   });
 };
 

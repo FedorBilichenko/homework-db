@@ -9,8 +9,21 @@ export interface IAuthorModel {
     name: string;
   }): Promise<{
     author: IAuthor | null;
+    error: string | null;
   }>;
+
   getAuthors(): Promise<{
-    authors: IAuthor[];
+    authors: IAuthor[] | null;
+    error: string | null;
+  }>;
+
+  // eslint-disable-next-line no-unused-vars
+  getAuthor(params: {
+    id: number;
+  }): Promise<{ author: IAuthor | null; error: string | null }>;
+
+  removeAll(): Promise<{
+    authors: IAuthor[] | null;
+    error: string | null;
   }>;
 }

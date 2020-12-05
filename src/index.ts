@@ -3,10 +3,14 @@ import express from 'express';
 import load from './loaders';
 import config from './config';
 
-const startServer = () => {
+const startServer = async () => {
   const app = express();
 
-  load({ app });
+  const { isError } = await load({ app });
+
+  if (isError) {
+    process.exit(1);
+  }
 
   app
     .listen(config.port, () => {

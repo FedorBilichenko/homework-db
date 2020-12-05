@@ -1,21 +1,15 @@
-import { IAuthor, IAuthorModel } from '../types';
-
 import BaseService from './BaseService';
 
-export default class AuthorService extends BaseService<IAuthorModel> {
-  constructor({ model }: { model: IAuthorModel }) {
-    super({ model });
-  }
-
+export default class AuthorService extends BaseService {
   async createAuthor({ name }: { name: string }) {
-    const { author } = await this.model.createAuthor({ name });
-
-    return {
-      author,
-    };
+    return this.models.authorModel.createAuthor({ name });
   }
 
-  async getAuthors(): Promise<{ authors: IAuthor[] }> {
-    return this.model.getAuthors();
+  async getAuthors() {
+    return this.models.authorModel.getAuthors();
+  }
+
+  async removeAll() {
+    return this.models.authorModel.removeAll();
   }
 }
