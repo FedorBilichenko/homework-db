@@ -114,7 +114,7 @@ export default class DiskModel extends BaseModel implements IDiskModel {
     name,
   }: {
     name: string;
-  }): Promise<{ disk: IDisk | null; error: string | null }> {
+  }): Promise<{ disk: IDisk[] | null; error: string | null }> {
     try {
       const res = await this.pool.query(
         `SELECT *  from ${this.table} WHERE name = $1`,
@@ -122,12 +122,39 @@ export default class DiskModel extends BaseModel implements IDiskModel {
       );
 
       return {
-        disk: res.rows[0],
-        error: res.rows[0] ? null : `Диска с name = ${name} не существует`,
+        disk: res.rows,
+        error: res.rows.length ? null : `Дисков с name = ${name} не существует`,
       };
     } catch (err) {
       return {
         disk: null,
+        error: err.detail,
+      };
+    }
+  }
+
+  async getDisksByParams({
+    name,
+    authorId,
+    price,
+  }: {
+    name: string;
+    authorId: string;
+    price: string;
+  }): Promise<{ disks: IDisk[] | null; error: string | null }> {
+    try {
+      const res = await this.pool.query(
+        `SELECT *  from ${this.table} WHERE name = $1 AND price <= $2 AND author_id = $3`,
+        [name, price, authorId]
+      );
+
+      return {
+        disks: res.rows,
+        error: res.rows.length ? null : `Таких дисков нет`,
+      };
+    } catch (err) {
+      return {
+        disks: null,
         error: err.detail,
       };
     }

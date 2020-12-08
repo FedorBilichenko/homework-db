@@ -16,4 +16,4 @@ RUN yarn build
 
 CMD ["yarn", "start:prod"]
 
-EXPOSE 3000
+EXPOSE 3001

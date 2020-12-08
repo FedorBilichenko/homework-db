@@ -26,6 +26,14 @@ export default class DiskService extends BaseService {
     return this.models.diskModel.getDiskByName(params);
   }
 
+  async getDisksByParams(params: {
+    name: string;
+    authorId: string;
+    price: string;
+  }) {
+    return this.models.diskModel.getDisksByParams(params);
+  }
+
   async removeAll() {
     return this.models.diskModel.removeAll();
   }

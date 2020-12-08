@@ -1,19 +1,24 @@
 import { Application } from 'express';
 
 import initModels from '../models';
-import initServices from '../services';
+import initServices, { IServices } from '../services';
 import routes from '../routes';
 import { BaseResp } from '../types';
 
 import loadApp from './app';
 import loadDb from './db';
 
-const load = async ({ app }: { app: Application }): Promise<BaseResp> => {
+const load = async ({
+  app,
+}: {
+  app: Application;
+}): Promise<BaseResp & { services: IServices | null }> => {
   const pool = await loadDb();
 
   if (!pool) {
     return {
       isError: true,
+      services: null,
     };
   }
 
@@ -25,6 +30,7 @@ const load = async ({ app }: { app: Application }): Promise<BaseResp> => {
 
   return {
     isError: false,
+    services,
   };
 };
 

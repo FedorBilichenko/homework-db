@@ -20,16 +20,22 @@ const routes = ({
     res.send(disk ? { disk } : createBadRequestBody({ error })).end();
   });
 
-  router.get('/get', async (req: Request, res: Response) => {
+  router.post('/get', async (req: Request, res: Response) => {
     const { disk, error } = await diskService.getDisk(req.body);
     res.status(disk ? 200 : 400);
     res.send(disk ? { disk } : createBadRequestBody({ error })).end();
   });
 
-  router.get('/get_by_name', async (req: Request, res: Response) => {
+  router.post('/get_by_name', async (req: Request, res: Response) => {
     const { disk, error } = await diskService.getDiskByName(req.body);
     res.status(disk ? 200 : 400);
     res.send(disk ? { disk } : createBadRequestBody({ error })).end();
+  });
+
+  router.post('/get_by_params', async (req: Request, res: Response) => {
+    const { disks, error } = await diskService.getDisksByParams(req.body);
+    res.status(disks ? 200 : 400);
+    res.send(disks ? { disks } : createBadRequestBody({ error })).end();
   });
 
   router.get('/list', async (req: Request, res: Response) => {

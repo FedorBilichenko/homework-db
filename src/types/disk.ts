@@ -34,5 +34,12 @@ export interface IDiskModel {
   // eslint-disable-next-line no-unused-vars
   getDiskByName(params: {
     name: string;
-  }): Promise<{ disk: IDisk | null; error: string | null }>;
+  }): Promise<{ disk: IDisk[] | null; error: string | null }>;
+
+  // eslint-disable-next-line no-unused-vars
+  getDisksByParams(params: {
+    name: string;
+    authorId: string;
+    price: string;
+  }): Promise<{ disks: IDisk[] | null; error: string | null }>;
 }

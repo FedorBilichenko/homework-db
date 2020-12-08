@@ -1,5 +1,6 @@
 import { Application, Router } from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 
 import config from '../config';
 
@@ -10,6 +11,7 @@ const loadApp = ({
   app: Application;
   routes: () => Router;
 }): Application => {
+  app.use(cors());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
   app.get('/status', (req, res) => {

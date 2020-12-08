@@ -5,6 +5,12 @@ services:
     depends_on:
       - postgres
     ports:
+      - "3001:3001"
+  front:
+    build: ./front
+    depends_on:
+      - app
+    ports:
       - "3000:3000"
 
   postgres:
