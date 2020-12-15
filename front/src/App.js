@@ -47,32 +47,32 @@ function App() {
   
   const click = useCallback(async () => {
     if (selected === 1) {
-      const data = await axios.get('http://localhost:3001/api/author/list');
+      const data = await axios.get('http://127.0.0.1:3001/api/author/list');
       
       setData(JSON.stringify(data.data, null, 4));
     }
     if (selected === 2) {
-      const data = await axios.get('http://localhost:3001/api/disk/list');
+      const data = await axios.get('http://127.0.0.1:3001/api/disk/list');
     
       setData(JSON.stringify(data.data, null, 4));
     }
     if (selected === 3) {
-      const data = await axios.get('http://localhost:3001/api/manager/list');
+      const data = await axios.get('http://127.0.0.1:3001/api/manager/list');
     
       setData(JSON.stringify(data.data, null, 4));
     }
     if (selected === 4) {
-      const data = await axios.get('http://localhost:3001/api/manager/list_with_orders');
+      const data = await axios.get('http://127.0.0.1:3001/api/manager/list_with_orders');
     
       setData(JSON.stringify(data.data, null, 4));
     }
     if (selected === 5) {
-      const data = await axios.get('http://localhost:3001/api/order/list');
+      const data = await axios.get('http://127.0.0.1:3001/api/order/list');
     
       setData(JSON.stringify(data.data, null, 4));
     }
     if (selected === 6) {
-      const data = await axios({ method: 'post', url: `http://localhost:3001/api/disk/get`, data: {
+      const data = await axios({ method: 'post', url: `http://127.0.0.1:3001/api/disk/get`, data: {
           id: diskId
         },
         headers: {
@@ -82,7 +82,7 @@ function App() {
       setData(JSON.stringify(data.data, null, 4));
     }
     if (selected === 7) {
-      const data = await axios({ method: 'post', url: `http://localhost:3001/api/disk/get_by_name`, data: {
+      const data = await axios({ method: 'post', url: `http://127.0.0.1:3001/api/disk/get_by_name`, data: {
           name: diskName
         },
         headers: {
@@ -92,7 +92,7 @@ function App() {
       setData(JSON.stringify(data.data, null, 4));
     }
     if (selected === 8) {
-      const data = await axios({ method: 'post', url: `http://localhost:3001/api/disk/get_by_params`, data: {
+      const data = await axios({ method: 'post', url: `http://127.0.0.1:3001/api/disk/get_by_params`, data: {
           name: diskName,
           price,
           authorId

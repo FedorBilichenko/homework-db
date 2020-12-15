@@ -12,7 +12,6 @@ services:
       - app
     ports:
       - "3000:3000"
-
   postgres:
     image: postgres:13.0-alpine
     environment:
